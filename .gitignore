@@ -51,3 +51,6 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+
+# Compiled CSS files
+src/**/*.css
