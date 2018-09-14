@@ -1,3 +1,6 @@
 import {combineReducers} from 'redux';
+import file from './reducers/file';
 
-export default combineReducers({});
+export default combineReducers({
+    file
+});

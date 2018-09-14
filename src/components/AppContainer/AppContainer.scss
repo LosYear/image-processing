@@ -35,13 +35,11 @@ body {
   animation-duration: 1s;
 }
 
-
-
 @media (max-width: 820px) {
-  body{
+  body {
     background-color: white;
   }
-  .wrapper{
+  .wrapper {
     min-width: auto;
     width: 100%;
     box-shadow: none;

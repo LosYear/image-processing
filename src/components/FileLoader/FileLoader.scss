@@ -1,0 +1,41 @@
+.file-loader {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-width: 2px;
+  border-color: rgb(102, 102, 102);
+  border-style: dashed;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s linear, border-style 0.3s linear, background-color 0.1s linear;
+
+  &_rejected {
+    border-color: rgb(204, 102, 102);
+    background-color: rgb(238, 238, 238);
+  }
+
+  &_accepted {
+    border-color: rgb(102, 204, 102);
+    border-style: solid;
+    background-color: rgb(238, 238, 238);
+  }
+
+  p {
+    color: #0f3c4b;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  svg{
+    width: 100%;
+    height: 80px;
+    fill: #92b0b3;
+    display: block;
+    margin-top: 40px;
+  }
+}

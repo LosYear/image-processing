@@ -191,11 +191,29 @@ module.exports = {
 
                     // SCSS LOADER
                     {
-                      test: /\.scss$/,
-                        loaders:[
+                        test: /\.scss$/,
+                        loaders: [
                             require.resolve('style-loader'),
                             require.resolve('css-loader'),
                             require.resolve('sass-loader')
+                        ]
+                    },
+
+                    // SVG
+                    {
+                        test: /\.svg$/,
+                        exclude: /node_modules/,
+                        use: [
+                            "babel-loader",
+                            {
+                                loader: require.resolve('react-svg-loader'), // 'react-svg'
+                                query: {
+                                    svgo: {
+                                        pretty: true,
+                                        plugins: [{removeStyleElement: true}]
+                                    }
+                                }
+                            }
                         ]
                     },
 

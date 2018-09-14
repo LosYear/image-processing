@@ -1,14 +1,27 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './AppContainer.scss';
+import {getFilename} from "../../selectors/file";
+import {connect} from 'react-redux';
+import FileLoader from "../FileLoader/FileLoader";
 
 class AppContainer extends Component {
     render() {
+        const {filename} = this.props;
+
+        if (!filename) {
+            return <FileLoader/>;
+        }
+
         return (
-            <div className="app-container">
-                123
-            </div>
+            <div>{this.props.filename}</div>
         );
     }
 }
 
-export default AppContainer;
+function mapStateToProps(state) {
+    return {
+        filename: getFilename(state)
+    }
+}
+
+export default connect(mapStateToProps)(AppContainer);
