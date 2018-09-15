@@ -2,6 +2,9 @@ import React from 'react';
 import './Toolbox.scss';
 import ExpandableContainer from "./ExpandableContainer";
 import ActionLink from "./ActionLink";
+import Histogram from "../Histogram/Histogram";
+import {connect} from 'react-redux';
+import {getHistogramData} from "../../selectors/image";
 
 class Toolbox extends React.Component {
     render() {
@@ -9,8 +12,8 @@ class Toolbox extends React.Component {
             <div className="toolbox-group">
                 <h2 className="toolbox__header">Информация</h2>
                 <div>
-                    <ExpandableContainer title="Гистрограмма">
-                        Гистрограмма<br/>
+                    <ExpandableContainer title="Гистрограмма" defaultExpanded={true}>
+                        <Histogram data={this.props.histogram}/>
                     </ExpandableContainer>
                     <ExpandableContainer title="График преобразования">
                         Гистрограмма<br/>
@@ -33,4 +36,10 @@ class Toolbox extends React.Component {
     }
 }
 
-export default Toolbox;
+function mapStateToProps(state) {
+    return {
+        histogram: getHistogramData(state)
+    };
+}
+
+export default connect(mapStateToProps)(Toolbox);

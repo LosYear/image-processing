@@ -23,7 +23,7 @@ class ExpandableContainer extends React.Component {
                 expanded={expanded}/>
             </div>
             <div className={"expandable-container__content"}
-                 style={{maxHeight: expanded ? this.refs.container.scrollHeight : 0}}
+                 style={{maxHeight: expanded ? (this.refs.container && this.refs.container.scrollHeight) : 0}}
                  ref="container">
                 <div className="expandable-container__content-wrapper">{this.props.children}</div>
             </div>
