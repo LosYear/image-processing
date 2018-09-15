@@ -1,0 +1,26 @@
+@keyframes loaderFadeIn {
+  from {
+    opacity: 0;
+    margin-top: 0;
+  }
+
+  to {
+    opacity: 1;
+    margin-top: -25px;
+  }
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: 0;
+  margin-top: -25px;
+  right: 0;
+  text-align: center;
+  animation: loaderFadeIn 1s;
+  svg {
+    width: 50px;
+    height: 50px;
+  }
+}

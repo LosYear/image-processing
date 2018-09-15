@@ -3,6 +3,7 @@ import './AppContainer.scss';
 import {getFilename} from "../../selectors/file";
 import {connect} from 'react-redux';
 import FileLoader from "../FileLoader/FileLoader";
+import ImageRenderer from "../ImageRenderer/ImageRenderer";
 
 class AppContainer extends Component {
     render() {
@@ -13,7 +14,7 @@ class AppContainer extends Component {
         }
 
         return (
-            <div>{this.props.filename}</div>
+            <ImageRenderer/>
         );
     }
 }
