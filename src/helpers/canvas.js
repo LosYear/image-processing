@@ -6,3 +6,29 @@ export const putPixelToCanvas = (canvasData, index, color) => {
     canvasData[index + 2] = color[2] || color;
     canvasData[index + 3] = 255;
 };
+
+export const drawFileOnCanvas = (canvas, filename) => {
+    const img = new Image();
+    const canvasContext = canvas.getContext('2d');
+
+    return new Promise((accepted, rejected) => {
+        img.onload = () => {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvasContext.drawImage(img, 0, 0, img.width, img.height);
+            accepted(canvas);
+        };
+
+        img.onerror = () => {
+            rejected('Failed to load image');
+        };
+
+        img.src = filename;
+    });
+};
+
+export const getFilePixelData = async (filename) => {
+    const canvas = document.createElement('canvas');
+    await drawFileOnCanvas(canvas, filename);
+    return canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+};

@@ -1,9 +1,10 @@
-import {takeLatest, put} from 'redux-saga/effects';
+import {takeLatest, put, call} from 'redux-saga/effects';
 import {
     CHOOSE_FILE,
     setFilename,
     calculateHistogram,
 } from "../actions";
+import {getFilePixelData} from "../helpers/canvas";
 
 export function* imageSaga() {
     yield takeLatest(CHOOSE_FILE, chooseFile);
@@ -12,5 +13,7 @@ export function* imageSaga() {
 function* chooseFile(action) {
     const filename = action.value;
     yield put(setFilename(filename));
-    yield put(calculateHistogram());
+
+    const pixelData = yield call(getFilePixelData, filename);
+    yield put(calculateHistogram(pixelData));
 }

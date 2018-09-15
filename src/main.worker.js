@@ -7,4 +7,4 @@ let worker = createWorker();
 
 worker.registerReducer(reducer);
 
-worker.registerTask(CALCULATE_HISTOGRAM, () => histogramProcessor.calculateHistogram());
+worker.registerTask(CALCULATE_HISTOGRAM, (payload) => histogramProcessor.calculateHistogram(payload.data, payload.channel));

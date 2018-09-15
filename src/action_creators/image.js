@@ -41,9 +41,9 @@ export function chooseFile(filename) {
  * Dispatch this action to recalculate histogram data and to update it, uses async web worker
  * @return {Function}
  */
-export function calculateHistogram() {
+export function calculateHistogram(data) {
     return (dispatch) => {
-        dispatch({task: CALCULATE_HISTOGRAM}).then((task) => {
+        dispatch({task: CALCULATE_HISTOGRAM, data: data}).then((task) => {
             dispatch(setHistogramData(task.response))
         });
     }

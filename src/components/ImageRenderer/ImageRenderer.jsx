@@ -2,6 +2,7 @@ import React from 'react';
 import {getFilename} from "../../selectors/image";
 import {connect} from 'react-redux';
 import './ImageRenderer.scss';
+import {drawFileOnCanvas} from "../../helpers/canvas";
 
 class ImageRenderer extends React.PureComponent {
     componentDidMount() {
@@ -13,15 +14,7 @@ class ImageRenderer extends React.PureComponent {
     }
 
     drawImage = () => {
-        const canvas = this.refs.canvas;
-        const canvasContext = canvas.getContext('2d');
-        const img = new Image();
-        img.onload = () => {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            canvasContext.drawImage(img, 0, 0, img.width, img.height);
-        };
-        img.src = this.props.image;
+        drawFileOnCanvas(this.refs.canvas, this.props.image);
     };
 
     render() {
