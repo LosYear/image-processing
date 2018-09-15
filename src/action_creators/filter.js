@@ -5,7 +5,3 @@ export function setFilterName(name) {
         dispatch({type: SET_FILTER_NAME_ACTION, value: name});
     };
 }
-
-export function resetFilterName(){
-    return setFilterName(null);
-}

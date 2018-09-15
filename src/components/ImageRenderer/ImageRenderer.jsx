@@ -1,15 +1,15 @@
 import React from 'react';
-import {getFilename} from "../../selectors/file";
+import {getFilename} from "../../selectors/image";
 import {connect} from 'react-redux';
-import Loader from "../Loader/Loader";
+import './ImageRenderer.scss';
 
 class ImageRenderer extends React.Component {
     componentDidMount() {
-        //this.drawImage();
+        this.drawImage();
     }
 
     componentDidUpdate() {
-        //this.drawImage();
+        this.drawImage();
     }
 
     drawImage = () => {
@@ -18,15 +18,16 @@ class ImageRenderer extends React.Component {
         const img = new Image();
         img.onload = () => {
             console.log(canvas.width, canvas.height);
-            canvasContext.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvasContext.drawImage(img, 0, 0, img.width, img.height);
         };
         img.src = this.props.image;
     };
 
     render() {
-        return <Loader/>;
-
-        return <canvas ref="canvas" width={300} height={300}/>;
+        return <canvas ref="canvas"/>;
     }
 }
 

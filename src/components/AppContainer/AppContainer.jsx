@@ -1,27 +1,26 @@
 import React, {Component} from 'react';
 import './AppContainer.scss';
-import {getFilename} from "../../selectors/file";
+import {getFilename} from "../../selectors/image";
 import {connect} from 'react-redux';
-import FileLoader from "../FileLoader/FileLoader";
-import ImageRenderer from "../ImageRenderer/ImageRenderer";
+import ImageBox from "../ImageBox/ImageBox";
+import Toolbox from "../Toolbox/Toolbox";
+import Loader from "../Loader/Loader";
 
 class AppContainer extends Component {
     render() {
-        const {filename} = this.props;
-
-        if (!filename) {
-            return <FileLoader/>;
-        }
-
-        return (
-            <ImageRenderer/>
-        );
+        const {filename, loaderShown} = this.props;
+        return <div className="box">
+            <ImageBox filename={filename}/>
+            {filename && <Toolbox/>}
+            {loaderShown && <Loader withBackdrop={true}/>}
+        </div>;
     }
 }
 
 function mapStateToProps(state) {
     return {
-        filename: getFilename(state)
+        filename: getFilename(state),
+        loaderShown: false
     }
 }
 

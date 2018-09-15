@@ -21,15 +21,18 @@ body {
   }
 }
 
-.wrapper {
+.box {
   min-width: 700px;
-  width: 40%;
+  width: 60%;
   margin: 100px auto;
   background: white;
   padding: 15px;
   box-sizing: border-box;
   height: 500px;
   box-shadow: 0 0 55px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 
   animation: fadeIn;
   animation-duration: 1s;
@@ -39,8 +42,9 @@ body {
   body {
     background-color: white;
   }
-  .wrapper {
+  .box {
     min-width: auto;
+    flex-direction: column;
     width: 100%;
     box-shadow: none;
     margin: 0;

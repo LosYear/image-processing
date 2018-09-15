@@ -1,0 +1,26 @@
+.expandable-container {
+  margin-top: 10px;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: #18bc9c;
+    }
+  }
+
+  &__content {
+    display: block;
+    transition: max-height 0.2s ease;
+    overflow: hidden;
+
+    &-wrapper {
+      padding: 10px 0;
+    }
+  }
+}

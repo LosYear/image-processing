@@ -1,1 +1,0 @@
-export const getFilename = (state) => state.file.filename;

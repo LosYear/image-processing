@@ -13,7 +13,7 @@ import * as sagas from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(sagaMiddleware, thunkMiddleware)));
 
-sagaMiddleware.run(sagas.fileSaga);
+sagaMiddleware.run(sagas.imageSaga);
 
 ReactDOM.render(<Provider store={store}>
     <AppContainer/>

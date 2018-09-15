@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import file from './reducers/file';
-import filter from './reducers/filter';
+import image from './reducers/image';
+import loader from './reducers/loader';
 
 export default combineReducers({
-    file, filter
+    image, loader
 });

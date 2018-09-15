@@ -1,1 +1,1 @@
-export * from './sagas/file'
+export * from './sagas/image'

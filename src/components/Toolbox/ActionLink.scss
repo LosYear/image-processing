@@ -1,0 +1,16 @@
+.action-link {
+  margin-top: 10px;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: #18bc9c;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+}
