@@ -1,6 +1,7 @@
 .toolbox {
   width: 250px;
   margin-left: 20px;
+  user-select: none;
 
   &__header {
     font-size: 14px;
@@ -9,7 +10,7 @@
     color: #555f61;
   }
 
-  &-group{
+  &-group {
     margin-bottom: 20px;
   }
 }

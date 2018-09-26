@@ -1,7 +1,7 @@
 import React from 'react';
 import './FileLoader.scss';
 import Dropzone from 'react-dropzone'
-import Icon from './icon.svg';
+import Icon from './icon.js.svg';
 import {connect} from 'react-redux';
 import {chooseFile} from "./../../actions";
 

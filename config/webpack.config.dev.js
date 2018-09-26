@@ -201,7 +201,7 @@ module.exports = {
 
                     // SVG
                     {
-                        test: /\.svg$/,
+                        test: /\.js.svg$/,
                         exclude: /node_modules/,
                         use: [
                             "babel-loader",

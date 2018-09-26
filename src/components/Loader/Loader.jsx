@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from "./loader.svg";
+import Icon from "./loader.js.svg";
 import "./Loader.scss";
 
 export default (props) => (
