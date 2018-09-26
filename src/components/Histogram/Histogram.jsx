@@ -1,5 +1,4 @@
 import React from 'react';
-import {calcCanvasIndex, putPixelToCanvas} from "../../helpers/canvas";
 
 class Histogram extends React.PureComponent {
     componentDidMount() {
