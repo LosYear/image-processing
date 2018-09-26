@@ -5,6 +5,7 @@ import ActionLink from "./ActionLink";
 import Histogram from "../Histogram/Histogram";
 import {connect} from 'react-redux';
 import {getHistogramData} from "../../selectors/image";
+import {createGrayscale} from "../../actions";
 
 class Toolbox extends React.Component {
     render() {
@@ -12,18 +13,18 @@ class Toolbox extends React.Component {
             <div className="toolbox-group">
                 <h2 className="toolbox__header">Информация</h2>
                 <div>
-                    <ExpandableContainer title="Гистрограмма" defaultExpanded={true}>
-                        <Histogram data={this.props.histogram}/>
+                    <ExpandableContainer title="Гистрограмма">
+                        <Histogram data={this.props.histogram} color="black"/>
                     </ExpandableContainer>
-                    <ExpandableContainer title="График преобразования">
-                        Гистрограмма<br/>
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="График преобразования">*/}
+                    {/*Гистрограмма<br/>*/}
+                    {/*</ExpandableContainer>*/}
                 </div>
             </div>
             <div className="toolbox-group">
                 <h2 className="toolbox__header">Действия</h2>
                 <div>
-                    <ActionLink title="Оттенки серого"/>
+                    <ActionLink title="Оттенки серого" handleClick={this.props.createGrayscale}/>
                     <ExpandableContainer title="Яркость">
                         Content<br/>
                     </ExpandableContainer>
@@ -42,4 +43,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Toolbox);
+export default connect(mapStateToProps, {createGrayscale})(Toolbox);

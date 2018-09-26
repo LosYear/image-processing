@@ -30,5 +30,21 @@ export const drawFileOnCanvas = (canvas, filename) => {
 export const getFilePixelData = async (filename) => {
     const canvas = document.createElement('canvas');
     await drawFileOnCanvas(canvas, filename);
-    return canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height).data;
+    return canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+};
+
+export const savePixelData = (data, width, height) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    const context = canvas.getContext('2d');
+    const imageData = new ImageData(data, width, height);
+    context.putImageData(imageData, 0, 0);
+
+    return new Promise((accepted) => {
+        canvas.toBlob((blob) => {
+            accepted(URL.createObjectURL(blob));
+        });
+    });
 };
