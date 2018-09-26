@@ -129,6 +129,10 @@ module.exports = {
                 include: paths.appSrc,
             },
             {
+                test: /\.worker\.js$/,
+                use: {loader: 'worker-loader'}
+            },
+            {
                 // "oneOf" will traverse all following loaders until one will
                 // match the requirements. When no loader matches it will fall
                 // back to the "file" loader at the end of the loader list.
@@ -255,10 +259,6 @@ module.exports = {
                         options: {
                             name: 'static/media/[name].[hash:8].[ext]',
                         },
-                    },
-                    {
-                        test: /\.worker\.js$/,
-                        use: {loader: 'worker-loader'}
                     },
                     // ** STOP ** Are you adding a new loader?
                     // Make sure to add the new loader(s) before the "file" loader.
