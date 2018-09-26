@@ -8,10 +8,22 @@ export const SET_HISTOGRAM_DATA = 'SET_HISTOGRAM_DATA';
 export const SET_DIMENSIONS = 'SET_DIMENSIONS';
 export const CHOOSE_FILE = 'CHOOSE_FILE';
 export const UPDATE_IMAGE_DATA = 'UPDATE_IMAGE_DATA';
-export const SAVE_PIXEL_DATA = 'SAVE_PIXEL_DATA';
 
 export const CALCULATE_HISTOGRAM = 'CALCULATE_HISTOGRAM';
 export const CREATE_GRAYSCALE_IMAGE = 'CREATE_GRAYSCALE_IMAGE';
+
+function runFilter(filter, userData = {}) {
+    return async (dispatch, getState) => {
+        const {width, height} = getDimensions(getState());
+        if (width > 1000 || height > 1000) {
+            dispatch(showLoader());
+        }
+        const data = (await getFilePixelData(getFilename(getState()))).data;
+        dispatch({task: filter, data, ...userData}).then((task) => {
+            dispatch({type: UPDATE_IMAGE_DATA, data: task.response, width, height});
+        });
+    }
+}
 
 /**
  * Dispatch this action only to update filename
@@ -71,13 +83,4 @@ export function calculateHistogram(data) {
     }
 }
 
-export function createGrayscale() {
-    return async (dispatch, getState) => {
-        dispatch(showLoader());
-        const {width, height} = getDimensions(getState());
-        const data = (await getFilePixelData(getFilename(getState()))).data;
-        dispatch({task: CREATE_GRAYSCALE_IMAGE, data}).then((task) => {
-            dispatch({type: UPDATE_IMAGE_DATA, data: task.response, width, height});
-        });
-    }
-}
+export const createGrayscale = () => runFilter(CREATE_GRAYSCALE_IMAGE);
