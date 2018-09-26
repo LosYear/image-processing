@@ -18,7 +18,7 @@ class ImageRenderer extends React.PureComponent {
     };
 
     render() {
-        return <canvas ref="canvas"/>;
+        return <canvas className="image-display" ref="canvas"/>;
     }
 }
 
