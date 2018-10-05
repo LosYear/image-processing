@@ -64,6 +64,7 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
+    "class-names": "^1.0.0",
     "redux-devtools-extension": "^2.13.5",
     "worker-loader": "^2.0.0"
   },

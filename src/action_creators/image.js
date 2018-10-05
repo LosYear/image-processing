@@ -13,6 +13,7 @@ export const CALCULATE_HISTOGRAM = 'CALCULATE_HISTOGRAM';
 export const CREATE_GRAYSCALE_IMAGE = 'CREATE_GRAYSCALE_IMAGE';
 export const CREATE_NEGATIVE_IMAGE = 'CREATE_NEGATIVE_IMAGE';
 export const CREATE_SOLARISED_IMAGE = 'CREATE_SOLARISED_IMAGE';
+export const CREATE_INCREASED_CONTRAST = 'CREATE_INCREASED_CONTRAST';
 
 function runFilter(filter, userData = {}) {
     return async (dispatch, getState) => {
@@ -88,3 +89,4 @@ export function calculateHistogram(data) {
 export const createGrayscale = () => runFilter(CREATE_GRAYSCALE_IMAGE);
 export const createNegative = (threshold) => runFilter(CREATE_NEGATIVE_IMAGE, {threshold});
 export const createSolarised = (k) => runFilter(CREATE_SOLARISED_IMAGE, {k});
+export const createIncreasedContrast = (min, max) => runFilter(CREATE_INCREASED_CONTRAST, {min, max});

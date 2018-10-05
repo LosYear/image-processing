@@ -5,7 +5,7 @@ import ActionLink from "./ActionLink";
 import Histogram from "../Histogram/Histogram";
 import {connect} from 'react-redux';
 import {getHistogramData} from "../../selectors/image";
-import {createGrayscale, createNegative, createSolarised} from "../../actions";
+import {createGrayscale, createNegative, createSolarised, createIncreasedContrast} from "../../actions";
 import TooltippedSlider from "./TooltippedSlider";
 import NumberGroup from "./NumberGroup";
 import {Scrollbars} from 'react-custom-scrollbars';
@@ -29,12 +29,17 @@ class Toolbox extends React.Component {
                         <div>
                             <ActionLink title="Оттенки серого" handleClick={this.props.createGrayscale}/>
                             <ExpandableContainer title="Негатив">
-                                <TooltippedSlider max={255}
-                                                  onAfterChange={(value) => this.props.createNegative(value)}/>
+                                <TooltippedSlider max={255} min={0}
+                                                  handleClick={(value) => this.props.createNegative(value)}
+                                                  onChange={(value) => this.props.createNegative(value)}/>
                             </ExpandableContainer>
                             <ExpandableContainer title="Соляризация">
                                 <NumberGroup defaultValue={0.01} step={0.005}
                                              handleClick={(value) => this.props.createSolarised(value)}/>
+                            </ExpandableContainer>
+                            <ExpandableContainer title="Увеличение контрастности">
+                                <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
+                                                  handleClick={(value) => this.props.createIncreasedContrast(value[0], value[1])}/>
                             </ExpandableContainer>
                         </div>
                     </div>
@@ -50,4 +55,9 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, {createGrayscale, createNegative, createSolarised})(Toolbox);
+export default connect(mapStateToProps, {
+    createGrayscale,
+    createNegative,
+    createSolarised,
+    createIncreasedContrast
+})(Toolbox);

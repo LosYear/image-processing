@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from 'rc-slider/lib/Slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './TooltippedSlider.scss';
 
@@ -15,12 +15,18 @@ class TooltippedSlider extends React.Component {
 
     render() {
         const props = this.props;
+
+        const Component = (props.range) ? Slider.Range : Slider;
+
         return <div className="tooltipped-slider">
-            <Slider {...props} onChange={(value) => {
+            <Component {...props} onChange={(value) => {
                 this.setState({value});
                 props.onChange && props.onChange(value);
-            }}/> <span className="tooltipped-slider__tip"
-                       onClick={() => props.onAfterChange && props.onAfterChange(this.state.value)}>{this.state.value}</span>
+            }}/>
+            <span className="tooltipped-slider__tip"
+                  onClick={() => props.handleClick && props.handleClick(this.state.value)}>
+            {(props.range) ? (this.state.value[0] + " .. " + this.state.value[1]) : this.state.value}
+            </span>
         </div>;
     }
 }

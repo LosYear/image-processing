@@ -27,6 +27,8 @@
     color: black;
     position: relative;
     display: inline-block;
+    white-space: nowrap;
+    flex-shrink: 0;
 
     &:after {
       display: block;
@@ -37,7 +39,7 @@
       height: 100%;
       content: '';
       background: #18bc9c url(icons/check.svg) no-repeat center;
-      background-size: 45%;
+      background-size: 17px;
       opacity: 0;
       transition: opacity 0.3s ease;
       border-radius: 3px;
