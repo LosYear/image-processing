@@ -9,3 +9,5 @@ export const increaseContrast = (data, min, max) => data.map((el, index) => {
         return (el - min) / (max - min) * 255;
     }
 });
+
+export const decreaseContrast = (data, min, max) => data.map((el, index) => (index % 4 !== 3) ? (min + el / 255 * (max - min)) : el);

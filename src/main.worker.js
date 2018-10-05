@@ -5,7 +5,8 @@ import {
     CREATE_GRAYSCALE_IMAGE,
     CREATE_NEGATIVE_IMAGE,
     CREATE_SOLARISED_IMAGE,
-    CREATE_INCREASED_CONTRAST
+    CREATE_INCREASED_CONTRAST,
+    CREATE_DECREASED_CONTRAST
 } from "./actions";
 import * as imageProcessor from './lib/imageProcessor';
 
@@ -18,5 +19,6 @@ worker.registerTask(CREATE_GRAYSCALE_IMAGE, (payload) => imageProcessor.calculat
 worker.registerTask(CREATE_NEGATIVE_IMAGE, (payload) => imageProcessor.calculateNegative(payload.data, payload.threshold));
 worker.registerTask(CREATE_SOLARISED_IMAGE, (payload) => imageProcessor.calculateSolarisation(payload.data, payload.k));
 worker.registerTask(CREATE_INCREASED_CONTRAST, (payload) => imageProcessor.increaseContrast(payload.data, payload.min, payload.max));
+worker.registerTask(CREATE_DECREASED_CONTRAST, (payload) => imageProcessor.decreaseContrast(payload.data, payload.min, payload.max));
 
 export default worker;
