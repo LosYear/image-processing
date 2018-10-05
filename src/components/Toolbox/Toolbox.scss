@@ -10,6 +10,10 @@
     color: #555f61;
   }
 
+  &__inner {
+    padding-right: 10px;
+  }
+
   &-group {
     margin-bottom: 20px;
   }
@@ -20,5 +24,24 @@
     width: 100%;
     margin-top: 40px;
     margin-left: 0;
+  }
+}
+
+.toolbox-button {
+  -webkit-appearance: none;
+  width: 38px;
+  height: 22px;
+  border: 1px solid #18bc9c;
+  border-radius: 3px;
+  background: white url(icons/check-blue.svg) no-repeat center;
+  background-size: 45%;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  vertical-align: middle;
+
+  &:hover {
+    background: #18bc9c url(icons/check.svg) no-repeat center;
   }
 }
