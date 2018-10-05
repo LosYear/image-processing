@@ -15,7 +15,7 @@ deploy:
     branch: master
 addons:
   ssh_known_hosts: losyar.com
-before_install:
+before_deploy:
 - openssl aes-256-cbc -K $encrypted_6afd0e45ce6e_key -iv $encrypted_6afd0e45ce6e_iv
   -in deploy/deploy_rsa.enc -out /tmp/deploy_rsa -d
 - eval "$(ssh-agent -s)"
