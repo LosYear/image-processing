@@ -5,6 +5,5 @@ export function calculateNegative(data, threshold = 0) {
         }
 
         return (el >= threshold) ? 255 - el : el;
-
     });
 }

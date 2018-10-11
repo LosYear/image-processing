@@ -15,6 +15,7 @@ export const CREATE_NEGATIVE_IMAGE = 'CREATE_NEGATIVE_IMAGE';
 export const CREATE_SOLARISED_IMAGE = 'CREATE_SOLARISED_IMAGE';
 export const CREATE_INCREASED_CONTRAST = 'CREATE_INCREASED_CONTRAST';
 export const CREATE_DECREASED_CONTRAST = 'CREATE_DECREASED_CONTRAST';
+export const CREATE_BLURRED_IMAGE = 'CREATE_BLURRED_IMAGE';
 
 function runFilter(filter, userData = {}) {
     return async (dispatch, getState) => {
@@ -23,7 +24,7 @@ function runFilter(filter, userData = {}) {
             dispatch(showLoader());
         }
         const data = (await getFilePixelData(getFilename(getState()))).data;
-        dispatch({task: filter, data, ...userData}).then((task) => {
+        dispatch({task: filter, data, width, height, ...userData}).then((task) => {
             dispatch({type: UPDATE_IMAGE_DATA, data: task.response, width, height});
         });
     }
@@ -92,3 +93,4 @@ export const createNegative = (threshold) => runFilter(CREATE_NEGATIVE_IMAGE, {t
 export const createSolarised = (k) => runFilter(CREATE_SOLARISED_IMAGE, {k});
 export const createIncreasedContrast = (min, max) => runFilter(CREATE_INCREASED_CONTRAST, {min, max});
 export const createDecreasedContrast = (min, max) => runFilter(CREATE_DECREASED_CONTRAST, {min, max});
+export const createBlurredImage = (k) => runFilter(CREATE_BLURRED_IMAGE, {k});

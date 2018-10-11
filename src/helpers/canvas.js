@@ -1,5 +1,8 @@
 export const calcCanvasIndex = (column, row, width) => (column + row * width) * 4;
 
+export const getRowByIndex = (index, width) => Math.floor(index / (width * 4));
+export const getColumnByIndex = (index, width) => Math.floor(index / 4) % width;
+
 export const putPixelToCanvas = (canvasData, index, color) => {
     canvasData[index] = color[0] || color;
     canvasData[index + 1] = color[1] || color;

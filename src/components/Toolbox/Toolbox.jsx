@@ -10,7 +10,8 @@ import {
     createNegative,
     createSolarised,
     createIncreasedContrast,
-    createDecreasedContrast
+    createDecreasedContrast,
+    createBlurredImage
 } from "../../actions";
 import TooltippedSlider from "./TooltippedSlider";
 import NumberGroup from "./NumberGroup";
@@ -55,6 +56,11 @@ class Toolbox extends React.Component {
                                 <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
                                                   handleClick={(value) => this.props.createDecreasedContrast(value[0], value[1])}/>
                             </ExpandableContainer>
+
+                            <ExpandableContainer title="Сглаживание">
+                                <TooltippedSlider min={3} max={20} defaultValue={3}
+                                                  handleClick={(value) => this.props.createSmoothedImage(value)}/>
+                            </ExpandableContainer>
                         </div>
                     </div>
                 </div>
@@ -74,5 +80,6 @@ export default connect(mapStateToProps, {
     createNegative,
     createSolarised,
     createIncreasedContrast,
-    createDecreasedContrast
+    createDecreasedContrast,
+    createSmoothedImage: createBlurredImage
 })(Toolbox);
