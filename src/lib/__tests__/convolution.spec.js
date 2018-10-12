@@ -18,32 +18,34 @@ describe('transforms one pixel using convolution filter', () => {
 });
 
 describe('slices pixels for convolution filter', () => {
+    const offsets = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 0], [0, 1], [1, -1], [1, 0], [1, 1]];
+
     test('no border', () => {
-        const slice = slicePixels(fixtureData, 10, 10, 3, 3, 3);
+        const slice = slicePixels(fixtureData, 10, 10, 3, 3, offsets);
 
         expect(slice).toEqual([23, 24, 25, 33, 34, 35, 43, 44, 45]);
     });
 
     test('border filling', () => {
-        const slice = slicePixels(fixtureData, 10, 10, 0, 0, 3);
+        const slice = slicePixels(fixtureData, 10, 10, 0, 0, offsets);
 
         expect(slice).toEqual([1, 1, 2, 1, 1, 2, 11, 11, 12]);
     });
 
     test('bottom right corner', () => {
-        const slice = slicePixels(fixtureData, 10, 10, 9, 9, 3);
+        const slice = slicePixels(fixtureData, 10, 10, 9, 9, offsets);
 
         expect(slice).toEqual([89, 90, 90, 99, 100, 100, 99, 100, 100]);
     });
 
     test('partial filling', () => {
-        const slice = slicePixels(fixtureData, 10, 10, 0, 1, 3);
+        const slice = slicePixels(fixtureData, 10, 10, 0, 1, offsets);
 
         expect(slice).toEqual([1, 2, 3, 1, 2, 3, 11, 12, 13]);
     });
 
     test('slice one pixel', () => {
-        const slice = slicePixels(fixtureData, 10, 10, 0, 0, 1);
+        const slice = slicePixels(fixtureData, 10, 10, 0, 0, [[0, 0]]);
 
         expect(slice).toEqual([1]);
     });
