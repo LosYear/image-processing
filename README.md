@@ -28,7 +28,7 @@ image-processing/
     sagas
     selectors
   ...
-````
+```
 
 # Commands
 To start app:
