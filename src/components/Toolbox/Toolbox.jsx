@@ -11,7 +11,8 @@ import {
     createSolarised,
     createIncreasedContrast,
     createDecreasedContrast,
-    createBlurredImage
+    createBlurredImage,
+    createImageWithMedianFilter
 } from "../../actions";
 import TooltippedSlider from "./TooltippedSlider";
 import NumberGroup from "./NumberGroup";
@@ -59,8 +60,10 @@ class Toolbox extends React.Component {
 
                             <ExpandableContainer title="Сглаживание">
                                 <TooltippedSlider min={3} max={20} defaultValue={3}
-                                                  handleClick={(value) => this.props.createSmoothedImage(value)}/>
+                                                  handleClick={(value) => this.props.createBlurredImage(value)}/>
                             </ExpandableContainer>
+
+                            <ActionLink title="Медианный фильтр" handleClick={this.props.createImageWithMedianFilter}/>
                         </div>
                     </div>
                 </div>
@@ -81,5 +84,6 @@ export default connect(mapStateToProps, {
     createSolarised,
     createIncreasedContrast,
     createDecreasedContrast,
-    createSmoothedImage: createBlurredImage
+    createBlurredImage,
+    createImageWithMedianFilter
 })(Toolbox);

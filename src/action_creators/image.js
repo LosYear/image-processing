@@ -16,6 +16,7 @@ export const CREATE_SOLARISED_IMAGE = 'CREATE_SOLARISED_IMAGE';
 export const CREATE_INCREASED_CONTRAST = 'CREATE_INCREASED_CONTRAST';
 export const CREATE_DECREASED_CONTRAST = 'CREATE_DECREASED_CONTRAST';
 export const CREATE_BLURRED_IMAGE = 'CREATE_BLURRED_IMAGE';
+export const CREATE_IMAGE_WITH_MEDIAN_FILTER = 'CREATE_IMAGE_WITH_MEDIAN_FILTER';
 
 function runFilter(filter, userData = {}) {
     return async (dispatch, getState) => {
@@ -94,3 +95,4 @@ export const createSolarised = (k) => runFilter(CREATE_SOLARISED_IMAGE, {k});
 export const createIncreasedContrast = (min, max) => runFilter(CREATE_INCREASED_CONTRAST, {min, max});
 export const createDecreasedContrast = (min, max) => runFilter(CREATE_DECREASED_CONTRAST, {min, max});
 export const createBlurredImage = (k) => runFilter(CREATE_BLURRED_IMAGE, {k});
+export const createImageWithMedianFilter = () => runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);

@@ -112,3 +112,8 @@ export function applyConvolutionFilter(data, width, height, kernel, k, oneChanne
 
 export const applyBlurFilter = (data, width, height, k) => applyConvolutionFilter(data, width, height,
     [[1, 1, 1], [1, 1, 1], [1, 1, 1]], k);
+
+export const applyMedianFilter = (data, width, height, radius = 9) => applyFunctionalFilter(data, width, height, radius, (pixels) => {
+    const center = Math.ceil(radius / 2);
+    return pixels.sort()[center];
+});

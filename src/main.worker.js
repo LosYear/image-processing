@@ -7,7 +7,8 @@ import {
     CREATE_SOLARISED_IMAGE,
     CREATE_INCREASED_CONTRAST,
     CREATE_DECREASED_CONTRAST,
-    CREATE_BLURRED_IMAGE
+    CREATE_BLURRED_IMAGE,
+    CREATE_IMAGE_WITH_MEDIAN_FILTER
 } from "./actions";
 import * as imageProcessor from './lib/imageProcessor';
 
@@ -22,5 +23,6 @@ worker.registerTask(CREATE_SOLARISED_IMAGE, (payload) => imageProcessor.calculat
 worker.registerTask(CREATE_INCREASED_CONTRAST, (payload) => imageProcessor.increaseContrast(payload.data, payload.min, payload.max));
 worker.registerTask(CREATE_DECREASED_CONTRAST, (payload) => imageProcessor.decreaseContrast(payload.data, payload.min, payload.max));
 worker.registerTask(CREATE_BLURRED_IMAGE, (payload) => imageProcessor.applyBlurFilter(payload.data, payload.width, payload.height, payload.k));
+worker.registerTask(CREATE_IMAGE_WITH_MEDIAN_FILTER, (payload) => imageProcessor.applyMedianFilter(payload.data, payload.width, payload.height));
 
 export default worker;
