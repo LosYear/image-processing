@@ -4,6 +4,8 @@
   display: inline-block;
   position: relative;
   margin: 0 1rem;
+  flex-basis: 1.25rem;
+  flex-shrink: 0;
 
   span {
     top: 0.5rem;
