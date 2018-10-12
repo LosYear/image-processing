@@ -19,6 +19,8 @@ class Histogram extends React.PureComponent {
         const color = this.props.color || 0;
         const canvas = this.refs.canvas;
         const canvasContext = canvas.getContext('2d');
+        canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+
         const maxValue = Math.max(255, Math.max(...data));
         canvasContext.fillStyle = color;
 
