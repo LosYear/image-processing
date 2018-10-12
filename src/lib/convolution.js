@@ -37,14 +37,11 @@ export function calculatePixelConvolution(data, kernel) {
  * @param height {number}
  * @param row {number}
  * @param column {number}
- * @param size {number} sliced array will have size of size**2
+ * @param offsets {Array} which pixels around should be taken
  * @param channel {number} 0, 1, 2
  * @return {Array}
  */
-export function slicePixels(data, width, height, row, column, size, channel = 0) {
-    const absOffset = Math.floor(size / 2);
-    const oneDimensionalOffsets = fillArray(-absOffset, absOffset);
-    const offsets = product(oneDimensionalOffsets, oneDimensionalOffsets);
+export function slicePixels(data, width, height, row, column, offsets, channel = 0) {
     let result = [];
 
     for (let offset of offsets) {
@@ -69,10 +66,6 @@ export function slicePixels(data, width, height, row, column, size, channel = 0)
         result.push(data[index]);
     }
 
-    if (result.includes(undefined)) {
-        debugger;
-    }
-
     return result;
 }
 
@@ -81,36 +74,69 @@ export function slicePixels(data, width, height, row, column, size, channel = 0)
  * @param data {Array|Uint8ClampedArray}
  * @param width {number}
  * @param height {number}
- * @param kernel {Array} convolution kernel
- * @param k {number} norming coefficient
- * @param oneChanneled {boolean} calculate only one channel or not
+ * @param transformation {Function} (data, width, height, {index, element, row, column}) => number
  * @return {Uint8ClampedArray}
  */
-export function applyConvolutionFilter(data, width, height, kernel, k, oneChanneled = true) {
-    kernel = flatten(kernel);
+export function applyConvolutionFilter(data, width, height, transformation) {
+    let result = new Uint8ClampedArray(width * height * 4);
 
-    let result = [];
-    data.forEach((el, index) => {
-        if (index % 4 === 3) {
-            result.push(el);
-        }
-        else if (index % 4 !== 0 && oneChanneled) {
-            result.push(result[index - index % 4]);
-        }
-        else {
-            const row = getRowByIndex(index, width),
-                column = getColumnByIndex(index, width);
-            const neighbourhood = slicePixels(data, width, height, row, column, Math.floor(Math.sqrt(kernel.length)));
-            const pixel = (1 / k) * calculatePixelConvolution(neighbourhood, kernel);
+    for (let i = 0; i < data.length; i += 4) {
+        const row = getRowByIndex(i, width),
+            column = getColumnByIndex(i, width);
+        const pixel = transformation(data, width, height, {index: i, element: data[i], row, column});
 
-            result.push(Math.ceil(pixel));
-        }
-    });
+        result[i] = pixel;
+        result[i + 1] = pixel;
+        result[i + 2] = pixel;
+        result[i + 3] = 255;
+    }
 
-    return Uint8ClampedArray.from(result);
+    return result;
 }
 
-export const applyBlurFilter = (data, width, height, k) => applyConvolutionFilter(data, width, height,
+/**
+ * Applies matrix convolution filter with given kernel and coefficient
+ * @param data {Array|Uint8ClampedArray}
+ * @param width {number}
+ * @param height {number}
+ * @param kernel {Array}
+ * @param k {number} norming coefficient
+ * @return {Uint8ClampedArray}
+ */
+export const applyMatrixFilter = (data, width, height, kernel, k) => {
+    kernel = flatten(kernel);
+    const absOffset = Math.floor(Math.sqrt(kernel.length) / 2);
+    const oneDimensionalOffsets = fillArray(-absOffset, absOffset);
+    const offsets = product(oneDimensionalOffsets, oneDimensionalOffsets);
+
+    return applyConvolutionFilter(data, width, height, (data, width, height, {index, row, column}) => {
+        const neighbourhood = slicePixels(data, width, height, row, column, offsets);
+        return (1 / k) * calculatePixelConvolution(neighbourhood, kernel);
+    });
+};
+
+/**
+ * Applies convolution filter with given transformation fuction
+ * @param data {Array|Uint8ClampedArray}
+ * @param width {number}
+ * @param height {number}
+ * @param sliceSize {number} how many pixels should be sliced around pixel (including this pixel)
+ * @param transformation {Function} (pixels) => number
+ * @return {Uint8ClampedArray}
+ */
+export function applyFunctionalFilter(data, width, height, sliceSize, transformation) {
+    const absOffset = Math.floor(Math.sqrt(sliceSize) / 2);
+    const oneDimensionalOffsets = fillArray(-absOffset, absOffset);
+    const offsets = product(oneDimensionalOffsets, oneDimensionalOffsets);
+
+    return applyConvolutionFilter(data, width, height, (data, width, height, {index, row, column}) => {
+
+        const neighbourhood = slicePixels(data, width, height, row, column, offsets);
+        return transformation(neighbourhood);
+    });
+}
+
+export const applyBlurFilter = (data, width, height, k) => applyMatrixFilter(data, width, height,
     [[1, 1, 1], [1, 1, 1], [1, 1, 1]], k);
 
 export const applyMedianFilter = (data, width, height, radius = 9) => applyFunctionalFilter(data, width, height, radius, (pixels) => {
