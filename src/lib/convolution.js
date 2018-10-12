@@ -77,7 +77,7 @@ export function slicePixels(data, width, height, row, column, size, channel = 0)
 }
 
 /**
- * Applies convolution filter with given kernel and coefficient
+ * Applies convolution filter with given transformation function
  * @param data {Array|Uint8ClampedArray}
  * @param width {number}
  * @param height {number}
