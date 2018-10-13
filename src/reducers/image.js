@@ -1,11 +1,12 @@
-import {SET_FILENAME_ACTION, SET_HISTOGRAM_DATA, SET_DIMENSIONS} from "../action_creators/image";
+import {SET_FILENAME_ACTION, SET_HISTOGRAM_DATA, SET_DIMENSIONS, SET_GRAYSCALED_FLAG} from "../action_creators/image";
 
 const initialState = {
     filename: null,
     previousFilename: null,
     histogram: null,
     width: null,
-    height: null
+    height: null,
+    grayscaled: false
 };
 
 export default function (state = initialState, action) {
@@ -17,6 +18,8 @@ export default function (state = initialState, action) {
             return {...state, histogram: action.data};
         case SET_DIMENSIONS:
             return {...state, width: action.width, height: action.height};
+        case SET_GRAYSCALED_FLAG:
+            return {...state, grayscaled: action.value};
         default:
             return state;
     }

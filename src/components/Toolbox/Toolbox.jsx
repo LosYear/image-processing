@@ -4,7 +4,7 @@ import ExpandableContainer from "./ExpandableContainer";
 import ActionLink from "./ActionLink";
 import Histogram from "../Histogram/Histogram";
 import {connect} from 'react-redux';
-import {getHistogramData} from "../../selectors/image";
+import {getGrayscaledFlag, getHistogramData} from "../../selectors/image";
 import {
     createGrayscale,
     createNegative,
@@ -35,35 +35,40 @@ class Toolbox extends React.Component {
                     <div className="toolbox-group">
                         <h2 className="toolbox__header">Действия</h2>
                         <div>
-                            <ActionLink title="Оттенки серого" handleClick={this.props.createGrayscale}/>
+                            {!this.props.grayscaled &&
+                            <ActionLink title="Оттенки серого" handleClick={this.props.createGrayscale}/>}
 
-                            <ExpandableContainer title="Негатив">
-                                <TooltippedSlider max={255} min={0}
-                                                  handleClick={(value) => this.props.createNegative(value)}
-                                                  onChange={(value) => this.props.createNegative(value)}/>
-                            </ExpandableContainer>
+                            {this.props.grayscaled && <div>
 
-                            <ExpandableContainer title="Соляризация">
-                                <NumberGroup defaultValue={0.01} step={0.005}
-                                             handleClick={(value) => this.props.createSolarised(value)}/>
-                            </ExpandableContainer>
+                                <ExpandableContainer title="Негатив">
+                                    <TooltippedSlider max={255} min={0}
+                                                      handleClick={(value) => this.props.createNegative(value)}
+                                                      onChange={(value) => this.props.createNegative(value)}/>
+                                </ExpandableContainer>
 
-                            <ExpandableContainer title="Увеличение контрастности">
-                                <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
-                                                  handleClick={(value) => this.props.createIncreasedContrast(value[0], value[1])}/>
-                            </ExpandableContainer>
+                                <ExpandableContainer title="Соляризация">
+                                    <NumberGroup defaultValue={0.01} step={0.005}
+                                                 handleClick={(value) => this.props.createSolarised(value)}/>
+                                </ExpandableContainer>
 
-                            <ExpandableContainer title="Уменьшение контрастности">
-                                <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
-                                                  handleClick={(value) => this.props.createDecreasedContrast(value[0], value[1])}/>
-                            </ExpandableContainer>
+                                <ExpandableContainer title="Увеличение контрастности">
+                                    <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
+                                                      handleClick={(value) => this.props.createIncreasedContrast(value[0], value[1])}/>
+                                </ExpandableContainer>
 
-                            <ExpandableContainer title="Сглаживание">
-                                <TooltippedSlider min={3} max={20} defaultValue={3}
-                                                  handleClick={(value) => this.props.createBlurredImage(value)}/>
-                            </ExpandableContainer>
+                                <ExpandableContainer title="Уменьшение контрастности">
+                                    <TooltippedSlider min={0} max={255} range={true} defaultValue={[50, 150]}
+                                                      handleClick={(value) => this.props.createDecreasedContrast(value[0], value[1])}/>
+                                </ExpandableContainer>
 
-                            <ActionLink title="Медианный фильтр" handleClick={this.props.createImageWithMedianFilter}/>
+                                <ExpandableContainer title="Сглаживание">
+                                    <TooltippedSlider min={3} max={20} defaultValue={3}
+                                                      handleClick={(value) => this.props.createBlurredImage(value)}/>
+                                </ExpandableContainer>
+
+                                <ActionLink title="Медианный фильтр"
+                                            handleClick={this.props.createImageWithMedianFilter}/>
+                            </div>}
                         </div>
                     </div>
                 </div>
@@ -74,7 +79,8 @@ class Toolbox extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        histogram: getHistogramData(state)
+        histogram: getHistogramData(state),
+        grayscaled: getGrayscaledFlag(state)
     };
 }
 

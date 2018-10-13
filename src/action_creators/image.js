@@ -4,6 +4,7 @@ import {showLoader} from "./loader";
 
 export const SET_FILENAME_ACTION = 'SET_FILENAME_ACTION';
 export const SET_HISTOGRAM_DATA = 'SET_HISTOGRAM_DATA';
+export const SET_GRAYSCALED_FLAG = 'SET_GRAYSCALED_FLAG';
 
 export const SET_DIMENSIONS = 'SET_DIMENSIONS';
 export const CHOOSE_FILE = 'CHOOSE_FILE';
@@ -59,10 +60,20 @@ export function setHistogramData(data) {
  * @param height
  * @return {Function}
  */
-
 export function setDimensions(width, height) {
     return (dispatch) => {
         dispatch({type: SET_DIMENSIONS, width, height});
+    };
+}
+
+/**
+ * Dispatch this action to change the value of grayscale flag
+ * @param value
+ * @return {Function}
+ */
+export function setGrayscaledFlag(value) {
+    return (dispatch) => {
+        dispatch({type: SET_GRAYSCALED_FLAG, value});
     };
 }
 
@@ -89,7 +100,12 @@ export function calculateHistogram(data) {
     }
 }
 
-export const createGrayscale = () => runFilter(CREATE_GRAYSCALE_IMAGE);
+export function createGrayscale() {
+    return (dispatch) => {
+        dispatch(runFilter(CREATE_GRAYSCALE_IMAGE)).then(() => dispatch(setGrayscaledFlag(true)));
+    }
+}
+
 export const createNegative = (threshold) => runFilter(CREATE_NEGATIVE_IMAGE, {threshold});
 export const createSolarised = (k) => runFilter(CREATE_SOLARISED_IMAGE, {k});
 export const createIncreasedContrast = (min, max) => runFilter(CREATE_INCREASED_CONTRAST, {min, max});
