@@ -1,1 +1,1 @@
-export const isLoaderShown = (state) => state.loader.isShown;
+export const isLoaderShown = state => state.loader.isShown;

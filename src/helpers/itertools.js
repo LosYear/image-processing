@@ -5,15 +5,15 @@
  * @return {Array}
  */
 export function product(a, b) {
-    let result = [];
+  const result = [];
 
-    for (let first of a) {
-        for (let second of b) {
-            result.push([first, second]);
-        }
+  for (const first of a) {
+    for (const second of b) {
+      result.push([first, second]);
     }
+  }
 
-    return result;
+  return result;
 }
 
 /**
@@ -23,10 +23,10 @@ export function product(a, b) {
  * @return {Array}
  */
 export function fillArray(from, to) {
-    let result = [];
-    for (let i = from; i <= to; i++) {
-        result.push(i);
-    }
+  const result = [];
+  for (let i = from; i <= to; i++) {
+    result.push(i);
+  }
 
-    return result;
+  return result;
 }

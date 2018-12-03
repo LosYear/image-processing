@@ -1,6 +1,6 @@
-import {getDimensions, getFilename} from "../selectors/image";
-import {getFilePixelData} from "../helpers/canvas";
-import {showLoader} from "./loader";
+import { getDimensions, getFilename } from '../selectors/image';
+import { getFilePixelData } from '../helpers/canvas';
+import { showLoader } from './loader';
 
 export const SET_FILENAME_ACTION = 'SET_FILENAME_ACTION';
 export const SET_HISTOGRAM_DATA = 'SET_HISTOGRAM_DATA';
@@ -17,19 +17,20 @@ export const CREATE_SOLARISED_IMAGE = 'CREATE_SOLARISED_IMAGE';
 export const CREATE_INCREASED_CONTRAST = 'CREATE_INCREASED_CONTRAST';
 export const CREATE_DECREASED_CONTRAST = 'CREATE_DECREASED_CONTRAST';
 export const CREATE_BLURRED_IMAGE = 'CREATE_BLURRED_IMAGE';
-export const CREATE_IMAGE_WITH_MEDIAN_FILTER = 'CREATE_IMAGE_WITH_MEDIAN_FILTER';
+export const CREATE_IMAGE_WITH_MEDIAN_FILTER =
+  'CREATE_IMAGE_WITH_MEDIAN_FILTER';
 
 function runFilter(filter, userData = {}) {
-    return async (dispatch, getState) => {
-        const {width, height} = getDimensions(getState());
-        if (width > 1000 || height > 1000) {
-            dispatch(showLoader());
-        }
-        const data = (await getFilePixelData(getFilename(getState()))).data;
-        dispatch({task: filter, data, width, height, ...userData}).then((task) => {
-            dispatch({type: UPDATE_IMAGE_DATA, data: task.response, width, height});
-        });
+  return async (dispatch, getState) => {
+    const { width, height } = getDimensions(getState());
+    if (width > 1000 || height > 1000) {
+      dispatch(showLoader());
     }
+    const data = (await getFilePixelData(getFilename(getState()))).data;
+    dispatch({ task: filter, data, width, height, ...userData }).then(task => {
+      dispatch({ type: UPDATE_IMAGE_DATA, data: task.response, width, height });
+    });
+  };
 }
 
 /**
@@ -38,9 +39,9 @@ function runFilter(filter, userData = {}) {
  * @return {Function}
  */
 export function setFilename(filename) {
-    return (dispatch) => {
-        dispatch({type: SET_FILENAME_ACTION, value: filename});
-    };
+  return dispatch => {
+    dispatch({ type: SET_FILENAME_ACTION, value: filename });
+  };
 }
 
 /**
@@ -49,9 +50,9 @@ export function setFilename(filename) {
  * @return {Function}
  */
 export function setHistogramData(data) {
-    return (dispatch) => {
-        dispatch({type: SET_HISTOGRAM_DATA, data: data});
-    };
+  return dispatch => {
+    dispatch({ type: SET_HISTOGRAM_DATA, data });
+  };
 }
 
 /**
@@ -61,9 +62,9 @@ export function setHistogramData(data) {
  * @return {Function}
  */
 export function setDimensions(width, height) {
-    return (dispatch) => {
-        dispatch({type: SET_DIMENSIONS, width, height});
-    };
+  return dispatch => {
+    dispatch({ type: SET_DIMENSIONS, width, height });
+  };
 }
 
 /**
@@ -72,9 +73,9 @@ export function setDimensions(width, height) {
  * @return {Function}
  */
 export function setGrayscaledFlag(value) {
-    return (dispatch) => {
-        dispatch({type: SET_GRAYSCALED_FLAG, value});
-    };
+  return dispatch => {
+    dispatch({ type: SET_GRAYSCALED_FLAG, value });
+  };
 }
 
 /**
@@ -83,9 +84,9 @@ export function setGrayscaledFlag(value) {
  * @return {Function}
  */
 export function chooseFile(filename) {
-    return (dispatch) => {
-        dispatch({type: CHOOSE_FILE, value: filename});
-    };
+  return dispatch => {
+    dispatch({ type: CHOOSE_FILE, value: filename });
+  };
 }
 
 /**
@@ -93,22 +94,28 @@ export function chooseFile(filename) {
  * @return {Function}
  */
 export function calculateHistogram(data) {
-    return (dispatch) => {
-        dispatch({task: CALCULATE_HISTOGRAM, data: data}).then((task) => {
-            dispatch(setHistogramData(task.response))
-        });
-    }
+  return dispatch => {
+    dispatch({ task: CALCULATE_HISTOGRAM, data }).then(task => {
+      dispatch(setHistogramData(task.response));
+    });
+  };
 }
 
 export function createGrayscale() {
-    return (dispatch) => {
-        dispatch(runFilter(CREATE_GRAYSCALE_IMAGE)).then(() => dispatch(setGrayscaledFlag(true)));
-    }
+  return dispatch => {
+    dispatch(runFilter(CREATE_GRAYSCALE_IMAGE)).then(() =>
+      dispatch(setGrayscaledFlag(true))
+    );
+  };
 }
 
-export const createNegative = (threshold) => runFilter(CREATE_NEGATIVE_IMAGE, {threshold});
-export const createSolarised = (k) => runFilter(CREATE_SOLARISED_IMAGE, {k});
-export const createIncreasedContrast = (min, max) => runFilter(CREATE_INCREASED_CONTRAST, {min, max});
-export const createDecreasedContrast = (min, max) => runFilter(CREATE_DECREASED_CONTRAST, {min, max});
-export const createBlurredImage = (k) => runFilter(CREATE_BLURRED_IMAGE, {k});
-export const createImageWithMedianFilter = () => runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);
+export const createNegative = threshold =>
+  runFilter(CREATE_NEGATIVE_IMAGE, { threshold });
+export const createSolarised = k => runFilter(CREATE_SOLARISED_IMAGE, { k });
+export const createIncreasedContrast = (min, max) =>
+  runFilter(CREATE_INCREASED_CONTRAST, { min, max });
+export const createDecreasedContrast = (min, max) =>
+  runFilter(CREATE_DECREASED_CONTRAST, { min, max });
+export const createBlurredImage = k => runFilter(CREATE_BLURRED_IMAGE, { k });
+export const createImageWithMedianFilter = () =>
+  runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);

@@ -3,4 +3,4 @@
  * @param array {Array}
  * @return {Array}
  */
-export const flatten = (array) => array.reduce((acc, val) => acc.concat(val), []);
+export const flatten = array => array.reduce((acc, val) => acc.concat(val), []);
