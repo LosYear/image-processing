@@ -60,8 +60,9 @@ export function slicePixels(
   const result = [];
 
   for (const offset of offsets) {
-    let x = column + offset[1],
-      y = row + offset[0];
+    let x = column + offset[1];
+
+    let y = row + offset[0];
 
     if (x < 0) {
       x = 0;
@@ -94,8 +95,9 @@ export function applyConvolutionFilter(data, width, height, transformation) {
   const result = new Uint8ClampedArray(width * height * 4);
 
   for (let i = 0; i < data.length; i += 4) {
-    const row = getRowByIndex(i, width),
-      column = getColumnByIndex(i, width);
+    const row = getRowByIndex(i, width);
+
+    const column = getColumnByIndex(i, width);
     const pixel = transformation(data, width, height, {
       index: i,
       element: data[i],

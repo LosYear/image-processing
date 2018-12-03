@@ -26,7 +26,7 @@ function runFilter(filter, userData = {}) {
     if (width > 1000 || height > 1000) {
       dispatch(showLoader());
     }
-    const data = (await getFilePixelData(getFilename(getState()))).data;
+    const { data } = await getFilePixelData(getFilename(getState()));
     dispatch({ task: filter, data, width, height, ...userData }).then(task => {
       dispatch({ type: UPDATE_IMAGE_DATA, data: task.response, width, height });
     });
