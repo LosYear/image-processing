@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getFilename } from '../../selectors/image';
 import './ImageRenderer.scss';
 import { drawFileOnCanvas } from '../../helpers/canvas';
+import RegionSelect from '../RegionSelect/RegionSelect';
 
 class ImageRenderer extends React.PureComponent {
   componentDidMount() {
@@ -18,7 +19,13 @@ class ImageRenderer extends React.PureComponent {
   };
 
   render() {
-    return <canvas className="image-display" ref="canvas" />;
+    return (
+      <div className="image-display">
+        <RegionSelect>
+          <canvas ref="canvas" />
+        </RegionSelect>
+      </div>
+    );
   }
 }
 
