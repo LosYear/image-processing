@@ -9,7 +9,8 @@ import {
   CREATE_DECREASED_CONTRAST,
   CREATE_BLURRED_IMAGE,
   CREATE_IMAGE_WITH_MEDIAN_FILTER,
-  APPLY_KIRSCH_OPERATOR
+  APPLY_KIRSCH_OPERATOR,
+  APPLY_ADAPTIVE_BINARIZATION
 } from './actions';
 import * as imageProcessor from './lib/imageProcessor';
 
@@ -49,6 +50,14 @@ worker.registerTask(CREATE_IMAGE_WITH_MEDIAN_FILTER, payload =>
 
 worker.registerTask(APPLY_KIRSCH_OPERATOR, payload =>
   imageProcessor.applyKirschOperator(
+    payload.data,
+    payload.width,
+    payload.height
+  )
+);
+
+worker.registerTask(APPLY_ADAPTIVE_BINARIZATION, payload =>
+  imageProcessor.applyAdaptiveBinarization(
     payload.data,
     payload.width,
     payload.height

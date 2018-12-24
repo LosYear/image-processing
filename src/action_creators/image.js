@@ -21,6 +21,7 @@ export const CREATE_IMAGE_WITH_MEDIAN_FILTER =
   'CREATE_IMAGE_WITH_MEDIAN_FILTER';
 
 export const APPLY_KIRSCH_OPERATOR = 'APPLY_KIRSCH_OPERATOR';
+export const APPLY_ADAPTIVE_BINARIZATION = 'APPLY_ADAPTIVE_BINARIZATION';
 
 function runFilter(filter, userData = {}) {
   return async (dispatch, getState) => {
@@ -122,3 +123,5 @@ export const createBlurredImage = k => runFilter(CREATE_BLURRED_IMAGE, { k });
 export const createImageWithMedianFilter = () =>
   runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);
 export const applyKirschOperator = () => runFilter(APPLY_KIRSCH_OPERATOR);
+export const applyAdaptiveBinarization = () =>
+  runFilter(APPLY_ADAPTIVE_BINARIZATION);

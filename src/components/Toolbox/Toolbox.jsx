@@ -14,7 +14,8 @@ import {
   createDecreasedContrast,
   createBlurredImage,
   createImageWithMedianFilter,
-  applyKirschOperator
+  applyKirschOperator,
+  applyAdaptiveBinarization
 } from '../../actions';
 import TooltippedSlider from './TooltippedSlider';
 import NumberGroup from './NumberGroup';
@@ -103,7 +104,11 @@ class Toolbox extends React.Component {
                     />
                     <ActionLink
                       title="Оператор Кирша"
-                      handleClick={this.props.applyKirshOperator}
+                      handleClick={this.props.applyKirschOperator}
+                    />
+                    <ActionLink
+                      title="Адаптивная бинаризация"
+                      handleClick={this.props.applyAdaptiveBinarization}
                     />
                   </div>
                 )}
@@ -133,6 +138,7 @@ export default connect(
     createDecreasedContrast,
     createBlurredImage,
     createImageWithMedianFilter,
-    applyKirshOperator: applyKirschOperator
+    applyKirschOperator,
+    applyAdaptiveBinarization
   }
 )(Toolbox);
