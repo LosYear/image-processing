@@ -20,6 +20,8 @@ export const CREATE_BLURRED_IMAGE = 'CREATE_BLURRED_IMAGE';
 export const CREATE_IMAGE_WITH_MEDIAN_FILTER =
   'CREATE_IMAGE_WITH_MEDIAN_FILTER';
 
+export const APPLY_KIRSCH_OPERATOR = 'APPLY_KIRSCH_OPERATOR';
+
 function runFilter(filter, userData = {}) {
   return async (dispatch, getState) => {
     const { width, height } = getDimensions(getState());
@@ -119,3 +121,4 @@ export const createDecreasedContrast = (min, max) =>
 export const createBlurredImage = k => runFilter(CREATE_BLURRED_IMAGE, { k });
 export const createImageWithMedianFilter = () =>
   runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);
+export const applyKirschOperator = () => runFilter(APPLY_KIRSCH_OPERATOR);

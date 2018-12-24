@@ -4,3 +4,4 @@ export { calculateNegative } from './negative';
 export { calculateSolarisation } from './solarisation';
 export * from './contrast';
 export { applyBlurFilter, applyMedianFilter } from './convolution';
+export { applyKirschOperator } from './kirsсhOperator';

@@ -13,7 +13,8 @@ import {
   createIncreasedContrast,
   createDecreasedContrast,
   createBlurredImage,
-  createImageWithMedianFilter
+  createImageWithMedianFilter,
+  applyKirschOperator
 } from '../../actions';
 import TooltippedSlider from './TooltippedSlider';
 import NumberGroup from './NumberGroup';
@@ -100,6 +101,10 @@ class Toolbox extends React.Component {
                       title="Медианный фильтр"
                       handleClick={this.props.createImageWithMedianFilter}
                     />
+                    <ActionLink
+                      title="Оператор Кирша"
+                      handleClick={this.props.applyKirshOperator}
+                    />
                   </div>
                 )}
               </div>
@@ -127,6 +132,7 @@ export default connect(
     createIncreasedContrast,
     createDecreasedContrast,
     createBlurredImage,
-    createImageWithMedianFilter
+    createImageWithMedianFilter,
+    applyKirshOperator: applyKirschOperator
   }
 )(Toolbox);
