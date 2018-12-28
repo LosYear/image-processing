@@ -19,6 +19,7 @@ import {
 } from '../../actions';
 import TooltippedSlider from './TooltippedSlider';
 import NumberGroup from './NumberGroup';
+import RotationUI from './RotationUI';
 
 class Toolbox extends React.Component {
   render() {
@@ -110,6 +111,9 @@ class Toolbox extends React.Component {
                       title="Адаптивная бинаризация"
                       handleClick={this.props.applyAdaptiveBinarization}
                     />
+                    <ExpandableContainer title="Поворот">
+                      <RotationUI />
+                    </ExpandableContainer>
                   </div>
                 )}
               </div>

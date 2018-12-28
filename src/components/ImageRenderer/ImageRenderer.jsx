@@ -20,11 +20,9 @@ class ImageRenderer extends React.PureComponent {
 
   render() {
     return (
-      <div className="image-display">
-        <RegionSelect>
-          <canvas ref="canvas" />
-        </RegionSelect>
-      </div>
+      <RegionSelect>
+        <canvas ref="canvas" />
+      </RegionSelect>
     );
   }
 }

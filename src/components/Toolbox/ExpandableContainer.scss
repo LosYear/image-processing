@@ -23,4 +23,8 @@
       padding: 10px 8px;
     }
   }
+
+  &__row:not(:first-child) {
+    margin-top: 10px;
+  }
 }

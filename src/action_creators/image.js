@@ -23,6 +23,8 @@ export const CREATE_IMAGE_WITH_MEDIAN_FILTER =
 export const APPLY_KIRSCH_OPERATOR = 'APPLY_KIRSCH_OPERATOR';
 export const APPLY_ADAPTIVE_BINARIZATION = 'APPLY_ADAPTIVE_BINARIZATION';
 
+export const ROTATE_REGION = 'ROTATE_REGION';
+
 function runFilter(filter, userData = {}) {
   return async (dispatch, getState) => {
     const { width, height } = getDimensions(getState());
@@ -125,3 +127,5 @@ export const createImageWithMedianFilter = () =>
 export const applyKirschOperator = () => runFilter(APPLY_KIRSCH_OPERATOR);
 export const applyAdaptiveBinarization = () =>
   runFilter(APPLY_ADAPTIVE_BINARIZATION);
+export const rotateRegion = (region, angle, customCenter) =>
+  runFilter(ROTATE_REGION, { region, angle, customCenter });

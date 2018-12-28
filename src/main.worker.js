@@ -10,7 +10,8 @@ import {
   CREATE_BLURRED_IMAGE,
   CREATE_IMAGE_WITH_MEDIAN_FILTER,
   APPLY_KIRSCH_OPERATOR,
-  APPLY_ADAPTIVE_BINARIZATION
+  APPLY_ADAPTIVE_BINARIZATION,
+  ROTATE_REGION
 } from './actions';
 import * as imageProcessor from './lib/imageProcessor';
 
@@ -61,6 +62,17 @@ worker.registerTask(APPLY_ADAPTIVE_BINARIZATION, payload =>
     payload.data,
     payload.width,
     payload.height
+  )
+);
+
+worker.registerTask(ROTATE_REGION, payload =>
+  imageProcessor.rotate(
+    payload.data,
+    payload.width,
+    payload.height,
+    payload.region,
+    payload.angle,
+    payload.customCenter
   )
 );
 

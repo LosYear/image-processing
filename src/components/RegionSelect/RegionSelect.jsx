@@ -2,6 +2,13 @@ import React from 'react';
 import ReactRegionSelect from 'react-region-select';
 import { connect } from 'react-redux';
 import { setSelectedRegions } from './../../actions';
+import {
+  getRegions,
+  getRegionsSelectDisabled,
+  getRotationCenterPoint,
+  getRotationCenterType
+} from '../../selectors/region';
+import './RegionSelect.scss';
 
 class RegionSelect extends React.PureComponent {
   constructor(props) {
@@ -9,7 +16,8 @@ class RegionSelect extends React.PureComponent {
   }
 
   render() {
-    const { disabled } = this.props;
+    const { disabled, centerType, center } = this.props;
+
     return (
       <ReactRegionSelect
         maxRegions={1}
@@ -17,8 +25,13 @@ class RegionSelect extends React.PureComponent {
         onChange={this.props.setSelectedRegions}
         constraint
         regionStyle={{ zIndex: 1 }}
-        style={{ width: '100%', height: '100%' }}
       >
+        {centerType === 'arbitrary' && (
+          <div
+            className="region-point"
+            style={{ top: center.y + '%', left: center.x + '%' }}
+          />
+        )}
         {this.props.children}
       </ReactRegionSelect>
     );
@@ -27,8 +40,10 @@ class RegionSelect extends React.PureComponent {
 
 function mapStateToProps(state) {
   return {
-    regions: state.region.regions,
-    disabled: state.region.disabled
+    regions: getRegions(state),
+    disabled: getRegionsSelectDisabled(state),
+    center: getRotationCenterPoint(state),
+    centerType: getRotationCenterType(state)
   };
 }
 

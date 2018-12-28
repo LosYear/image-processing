@@ -6,20 +6,22 @@ class NumberGroup extends React.Component {
     super(props);
 
     this.state = {
-      value: props.defaultValue || ''
+      value: props.defaultValue || '0'
     };
   }
 
   onChange = event => {
+    this.props.handleChange && this.props.handleChange(event.target.value);
     this.setState({ value: event.target.value });
   };
 
   render() {
-    const { min, max, handleClick, step } = this.props;
+    const { min, max, handleClick, step, label } = this.props;
     const { value } = this.state;
 
     return (
       <div className="toolbox-number-group">
+        {label && <label>{label}</label>}
         <input
           className="toolbox-input"
           type="number"
@@ -29,7 +31,12 @@ class NumberGroup extends React.Component {
           step={step}
           onChange={this.onChange}
         />
-        <button className="toolbox-button" onClick={() => handleClick(value)} />
+        {handleClick && (
+          <button
+            className="toolbox-button"
+            onClick={() => handleClick(value)}
+          />
+        )}
       </div>
     );
   }
