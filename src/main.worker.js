@@ -11,7 +11,8 @@ import {
   CREATE_IMAGE_WITH_MEDIAN_FILTER,
   APPLY_KIRSCH_OPERATOR,
   APPLY_ADAPTIVE_BINARIZATION,
-  ROTATE_REGION
+  ROTATE_REGION,
+  SCALE_REGION
 } from './actions';
 import * as imageProcessor from './lib/imageProcessor';
 
@@ -73,6 +74,16 @@ worker.registerTask(ROTATE_REGION, payload =>
     payload.region,
     payload.angle,
     payload.customCenter
+  )
+);
+
+worker.registerTask(SCALE_REGION, payload =>
+  imageProcessor.biquadraticResampling(
+    payload.data,
+    payload.width,
+    payload.height,
+    payload.region,
+    payload.scale
   )
 );
 

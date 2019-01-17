@@ -15,11 +15,13 @@ import {
   createBlurredImage,
   createImageWithMedianFilter,
   applyKirschOperator,
-  applyAdaptiveBinarization
+  applyAdaptiveBinarization,
+  scaleRegion
 } from '../../actions';
 import TooltippedSlider from './TooltippedSlider';
 import NumberGroup from './NumberGroup';
 import RotationUI from './RotationUI';
+import { getCurrentRegion } from '../../selectors/region';
 
 class Toolbox extends React.Component {
   render() {
@@ -107,15 +109,27 @@ class Toolbox extends React.Component {
                       title="Оператор Кирша"
                       handleClick={this.props.applyKirschOperator}
                     />
+
                     <ActionLink
                       title="Адаптивная бинаризация"
                       handleClick={this.props.applyAdaptiveBinarization}
                     />
-                    <ExpandableContainer title="Поворот">
-                      <RotationUI />
-                    </ExpandableContainer>
                   </div>
                 )}
+
+                <ExpandableContainer title="Масштабирование">
+                  <NumberGroup
+                    defaultValue={2}
+                    step={0.5}
+                    handleClick={value =>
+                      this.props.scaleRegion(this.props.selectedRegion, value)
+                    }
+                  />
+                </ExpandableContainer>
+
+                <ExpandableContainer title="Поворот">
+                  <RotationUI />
+                </ExpandableContainer>
               </div>
             </div>
           </div>
@@ -128,7 +142,8 @@ class Toolbox extends React.Component {
 function mapStateToProps(state) {
   return {
     histogram: getHistogramData(state),
-    grayscaled: getGrayscaledFlag(state)
+    grayscaled: getGrayscaledFlag(state),
+    selectedRegion: getCurrentRegion(state)
   };
 }
 
@@ -143,6 +158,7 @@ export default connect(
     createBlurredImage,
     createImageWithMedianFilter,
     applyKirschOperator,
-    applyAdaptiveBinarization
+    applyAdaptiveBinarization,
+    scaleRegion
   }
 )(Toolbox);

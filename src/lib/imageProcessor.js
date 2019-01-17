@@ -7,3 +7,4 @@ export { applyBlurFilter, applyMedianFilter } from './convolution';
 export { applyKirschOperator } from './kirsсhOperator';
 export { applyAdaptiveBinarization } from './binarization';
 export { rotate } from './rotation';
+export { biquadraticResampling } from './resampling';
