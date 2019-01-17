@@ -127,8 +127,8 @@ export const createBlurredImage = k => runFilter(CREATE_BLURRED_IMAGE, { k });
 export const createImageWithMedianFilter = () =>
   runFilter(CREATE_IMAGE_WITH_MEDIAN_FILTER);
 export const applyKirschOperator = () => runFilter(APPLY_KIRSCH_OPERATOR);
-export const applyAdaptiveBinarization = () =>
-  runFilter(APPLY_ADAPTIVE_BINARIZATION);
+export const applyAdaptiveBinarization = sliceSize =>
+  runFilter(APPLY_ADAPTIVE_BINARIZATION, { sliceSize });
 export const rotateRegion = (region, angle, customCenter) =>
   runFilter(ROTATE_REGION, { region, angle, customCenter });
 

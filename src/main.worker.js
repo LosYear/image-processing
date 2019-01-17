@@ -62,7 +62,9 @@ worker.registerTask(APPLY_ADAPTIVE_BINARIZATION, payload =>
   imageProcessor.applyAdaptiveBinarization(
     payload.data,
     payload.width,
-    payload.height
+    payload.height,
+    7,
+    payload.sliceSize
   )
 );
 

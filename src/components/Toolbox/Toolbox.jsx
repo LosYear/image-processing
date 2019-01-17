@@ -18,7 +18,6 @@ import {
   applyAdaptiveBinarization,
   scaleRegion
 } from '../../actions';
-import TooltippedSlider from './TooltippedSlider';
 import NumberGroup from './NumberGroup';
 import RotationUI from './RotationUI';
 import { getCurrentRegion } from '../../selectors/region';
@@ -49,71 +48,78 @@ class Toolbox extends React.Component {
 
                 {this.props.grayscaled && (
                   <div>
-                    <ExpandableContainer title="Негатив">
-                      <TooltippedSlider
-                        max={255}
-                        min={0}
-                        handleClick={value => this.props.createNegative(value)}
-                        onChange={value => this.props.createNegative(value)}
-                      />
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="Негатив">*/}
+                    {/*<TooltippedSlider*/}
+                    {/*max={255}*/}
+                    {/*min={0}*/}
+                    {/*handleClick={value => this.props.createNegative(value)}*/}
+                    {/*onChange={value => this.props.createNegative(value)}*/}
+                    {/*/>*/}
+                    {/*</ExpandableContainer>*/}
 
-                    <ExpandableContainer title="Соляризация">
-                      <NumberGroup
-                        defaultValue={0.01}
-                        step={0.005}
-                        handleClick={value => this.props.createSolarised(value)}
-                      />
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="Соляризация">*/}
+                    {/*<NumberGroup*/}
+                    {/*defaultValue={0.01}*/}
+                    {/*step={0.005}*/}
+                    {/*handleClick={value => this.props.createSolarised(value)}*/}
+                    {/*/>*/}
+                    {/*</ExpandableContainer>*/}
 
-                    <ExpandableContainer title="Увеличение контрастности">
-                      <TooltippedSlider
-                        min={0}
-                        max={255}
-                        range
-                        defaultValue={[50, 150]}
-                        handleClick={value =>
-                          this.props.createIncreasedContrast(value[0], value[1])
-                        }
-                      />
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="Увеличение контрастности">*/}
+                    {/*<TooltippedSlider*/}
+                    {/*min={0}*/}
+                    {/*max={255}*/}
+                    {/*range*/}
+                    {/*defaultValue={[50, 150]}*/}
+                    {/*handleClick={value =>*/}
+                    {/*this.props.createIncreasedContrast(value[0], value[1])*/}
+                    {/*}*/}
+                    {/*/>*/}
+                    {/*</ExpandableContainer>*/}
 
-                    <ExpandableContainer title="Уменьшение контрастности">
-                      <TooltippedSlider
-                        min={0}
-                        max={255}
-                        range
-                        defaultValue={[50, 150]}
-                        handleClick={value =>
-                          this.props.createDecreasedContrast(value[0], value[1])
-                        }
-                      />
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="Уменьшение контрастности">*/}
+                    {/*<TooltippedSlider*/}
+                    {/*min={0}*/}
+                    {/*max={255}*/}
+                    {/*range*/}
+                    {/*defaultValue={[50, 150]}*/}
+                    {/*handleClick={value =>*/}
+                    {/*this.props.createDecreasedContrast(value[0], value[1])*/}
+                    {/*}*/}
+                    {/*/>*/}
+                    {/*</ExpandableContainer>*/}
 
-                    <ExpandableContainer title="Сглаживание">
-                      <TooltippedSlider
-                        min={3}
-                        max={20}
-                        defaultValue={3}
-                        handleClick={value =>
-                          this.props.createBlurredImage(value)
-                        }
-                      />
-                    </ExpandableContainer>
+                    {/*<ExpandableContainer title="Сглаживание">*/}
+                    {/*<TooltippedSlider*/}
+                    {/*min={3}*/}
+                    {/*max={20}*/}
+                    {/*defaultValue={3}*/}
+                    {/*handleClick={value =>*/}
+                    {/*this.props.createBlurredImage(value)*/}
+                    {/*}*/}
+                    {/*/>*/}
+                    {/*</ExpandableContainer>*/}
 
-                    <ActionLink
-                      title="Медианный фильтр"
-                      handleClick={this.props.createImageWithMedianFilter}
-                    />
+                    {/*<ActionLink*/}
+                    {/*title="Медианный фильтр"*/}
+                    {/*handleClick={this.props.createImageWithMedianFilter}*/}
+                    {/*/>*/}
                     <ActionLink
                       title="Оператор Кирша"
                       handleClick={this.props.applyKirschOperator}
                     />
 
-                    <ActionLink
-                      title="Адаптивная бинаризация"
-                      handleClick={this.props.applyAdaptiveBinarization}
-                    />
+                    <ExpandableContainer title="Адаптивная бинаризация">
+                      <NumberGroup
+                        defaultValue={3}
+                        min={3}
+                        max={15}
+                        step={1}
+                        handleClick={value =>
+                          this.props.applyAdaptiveBinarization(value * value)
+                        }
+                      />
+                    </ExpandableContainer>
                   </div>
                 )}
 
