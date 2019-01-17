@@ -15,7 +15,12 @@ class ImageRenderer extends React.PureComponent {
   }
 
   drawImage = () => {
-    drawFileOnCanvas(this.refs.canvas, this.props.image);
+    drawFileOnCanvas(this.refs.canvas, this.props.image).then(() => {
+      // Blame on it me, this is essential for region selection to work properly
+      const parent = this.props.parentRef.current.querySelector('div');
+      parent.style.height = this.refs.canvas.clientHeight + 'px';
+      parent.style.width = this.refs.canvas.clientWidth + 'px';
+    });
   };
 
   render() {

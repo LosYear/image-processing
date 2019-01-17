@@ -17,6 +17,7 @@ class RegionSelect extends React.PureComponent {
 
   render() {
     const { disabled, centerType, center } = this.props;
+    // return this.props.children;
 
     return (
       <ReactRegionSelect
