@@ -11,6 +11,9 @@ export const putPixelToCanvas = (canvasData, index, color) => {
   canvasData[index + 3] = 255;
 };
 
+export const getPixelByXY = (canvasData, width, x, y, channel = 0) =>
+  canvasData[calcCanvasIndex(x, y, width) + channel];
+
 export const drawFileOnCanvas = (canvas, filename) => {
   const img = new Image();
   const canvasContext = canvas.getContext('2d');

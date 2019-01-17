@@ -11,13 +11,8 @@ import {
 import './RegionSelect.scss';
 
 class RegionSelect extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { disabled, centerType, center } = this.props;
-    // return this.props.children;
 
     return (
       <ReactRegionSelect

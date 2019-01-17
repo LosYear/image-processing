@@ -25,6 +25,8 @@ export const APPLY_ADAPTIVE_BINARIZATION = 'APPLY_ADAPTIVE_BINARIZATION';
 
 export const ROTATE_REGION = 'ROTATE_REGION';
 
+export const SCALE_REGION = 'SCALE_REGION';
+
 function runFilter(filter, userData = {}) {
   return async (dispatch, getState) => {
     const { width, height } = getDimensions(getState());
@@ -129,3 +131,6 @@ export const applyAdaptiveBinarization = () =>
   runFilter(APPLY_ADAPTIVE_BINARIZATION);
 export const rotateRegion = (region, angle, customCenter) =>
   runFilter(ROTATE_REGION, { region, angle, customCenter });
+
+export const scaleRegion = (region, scale) =>
+  runFilter(SCALE_REGION, { region, scale });
