@@ -57,7 +57,7 @@ class RotationUI extends React.Component {
       setCenterType,
       setCenterPoint
     } = this.props;
-    console.log(centerX, centerY);
+
     return (
       <div>
         <div className="expandable-container__row">
