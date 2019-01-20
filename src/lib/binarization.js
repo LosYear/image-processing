@@ -1,5 +1,15 @@
 import { applyFunctionalFilter } from './convolution';
 
+/**
+ * https://homepages.inf.ed.ac.uk/rbf/HIPR2/adpthrsh.htm
+ * @param data
+ * @param width
+ * @param height
+ * @param c
+ * @param sliceSize
+ * @return {Uint8ClampedArray}
+ */
+
 export const applyAdaptiveBinarization = (
   data,
   width,

@@ -15,11 +15,11 @@ import {
   createBlurredImage,
   createImageWithMedianFilter,
   applyKirschOperator,
-  applyAdaptiveBinarization,
   scaleRegion
 } from '../../actions';
 import NumberGroup from './NumberGroup';
 import RotationUI from './RotationUI';
+import BinarizationUI from './BinarizationUI';
 import { getCurrentRegion } from '../../selectors/region';
 
 class Toolbox extends React.Component {
@@ -110,15 +110,7 @@ class Toolbox extends React.Component {
                     />
 
                     <ExpandableContainer title="Адаптивная бинаризация">
-                      <NumberGroup
-                        defaultValue={3}
-                        min={3}
-                        max={15}
-                        step={1}
-                        handleClick={value =>
-                          this.props.applyAdaptiveBinarization(value * value)
-                        }
-                      />
+                      <BinarizationUI />
                     </ExpandableContainer>
                   </div>
                 )}
@@ -164,7 +156,6 @@ export default connect(
     createBlurredImage,
     createImageWithMedianFilter,
     applyKirschOperator,
-    applyAdaptiveBinarization,
     scaleRegion
   }
 )(Toolbox);
