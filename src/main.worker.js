@@ -63,7 +63,7 @@ worker.registerTask(APPLY_ADAPTIVE_BINARIZATION, payload =>
     payload.data,
     payload.width,
     payload.height,
-    7,
+    payload.c,
     payload.sliceSize
   )
 );
