@@ -32,7 +32,7 @@ class BinarizationUI extends React.Component {
             type="number"
             step="1"
             value={c}
-            styles={{width: 50}}
+            style={{width: 50}}
             onChange={e => this.setState({ c: e.target.value })}
           />
           <button
